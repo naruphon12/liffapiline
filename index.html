@@ -48,24 +48,53 @@
   <script src="https://static.line-scdn.net/liff/edge/versions/2.4.0/sdk.js"></script>
   <script>
     function createUniversalLink() {
+      const link1 = liff.permanentLink.createUrl()
+      document.getElementById("universalLink1").append(link1)
+
+      liff.permanentLink.setExtraQueryParam('param=9')
+      const link2 = liff.permanentLink.createUrl()
+      document.getElementById("universalLink2").append(link2)
     }
 
     async function shareMsg() {
+      await liff.shareTargetPicker([
+        {
+          type: "text",
+          text: "This message was sent by ShareTargetPicker"
+        }
+      ])
     }
 
     function logOut() {
+      liff.logout()
+      window.location.reload()
     }
 
     function closed() {
+      liff.closeWindow()
     }
 
     async function scanCode() {
+      const result = await liff.scanCode()
+      document.getElementById("scanCode").append(result.value)
     }
 
     function openWindow() {
+      liff.openWindow({
+        url: "https://line.me",
+        external: true
+      })
     }
 
     async function getFriendship() {
+const friend=await liff.getFriendship()
+document.getElementById("friendship").append(friend.friendFlag)
+if (!friend.friendFlag){
+  if(confirm("คุรยังไม่ได้เพิ่ม Bot เป็นเพื่อน จะเพิ่มเลยไหม?")){
+    window.location="https://line.me/R/ti/p/@119ajkrj"
+  }
+}
+
     }
 
     async function sendMsg() {
