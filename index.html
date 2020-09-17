@@ -107,7 +107,7 @@
       <br>
       <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
 
-      <label for="phone"><b> 1:</b></label><br>
+      <label for="phone"><b> 2:</b></label><br>
 
       <button type="submit">ลงทะเบียน</button>
     
@@ -228,17 +228,17 @@
 
      
       
-      if (x.text == "external"){
+      if (liff.getContext().type == "external") {
         
         document.getElementById("ID").append(liff.getContext().groupId)
 
-      }else if(x.text =="group"){
+      }else if(liff.getContext().type  =="group"){
       
         document.getElementById("ID").append(liff.getContext().groupId)
-      }else if(x.text =="room"){
+      }else if(liff.getContext().type == "room"){
        
         document.getElementById("ID").append(liff.getContext().roomId)
-      }else if(x.text =="utou"){
+      }else if(liff.getContext().type == "utou"){
         
         document.getElementById("ID").append(liff.getContext().utouId)
       }
