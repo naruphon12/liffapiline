@@ -253,72 +253,72 @@
     }
 
 
-    const express = require('express')
-    const bodyParser = require('body-parser')
-    const request = require('request')
-    var RequestService = require("request");
-    const app = express()
-    const soapRequest = require('easy-soap-request');
-    const fs = require('fs');
-    function Registerline(bodyResponse, reply_token, phonenumber) {
-      let num = ''
-      var Lineid = ''
-      var userProfiles = ''
-      var username = ''
-      var lineurl = ''
-      num = num + bodyResponse.events[0].source.type
-      if (bodyResponse.events[0].source.type === 'user') {
-        Lineid = bodyResponse.events[0].source.userId;
-        // userProfiles = getUserProfiles(Lineid);
-        // username=userProfiles[0];
-        // lineurl=userProfiles[1];
-        username = 'user';
-        lineurl = 'NA';
-      } else if (bodyResponse.events[0].source.type === 'group') {
-        Lineid = bodyResponse.events[0].source.groupId;
-        username = 'group';
-        lineurl = 'NA';
-      } else if (bodyResponse.events[0].source.type === 'room') {
-        Lineid = bodyResponse.events[0].source.roomId;
-        username = 'room';
-        lineurl = 'NA';
-      }
-      // num = " ประเภท = "+ num +" userId =" + Lineid + "Phone_No =" + phonenumber 
+    // const express = require('express')
+    // const bodyParser = require('body-parser')
+    // const request = require('request')
+    // var RequestService = require("request");
+    // const app = express()
+    // const soapRequest = require('easy-soap-request');
+    // const fs = require('fs');
+    // function Registerline(bodyResponse, reply_token, phonenumber) {
+    //   let num = ''
+    //   var Lineid = ''
+    //   var userProfiles = ''
+    //   var username = ''
+    //   var lineurl = ''
+    //   num = num + bodyResponse.events[0].source.type
+    //   if (bodyResponse.events[0].source.type === 'user') {
+    //     Lineid = bodyResponse.events[0].source.userId;
+    //     // userProfiles = getUserProfiles(Lineid);
+    //     // username=userProfiles[0];
+    //     // lineurl=userProfiles[1];
+    //     username = 'user';
+    //     lineurl = 'NA';
+    //   } else if (bodyResponse.events[0].source.type === 'group') {
+    //     Lineid = bodyResponse.events[0].source.groupId;
+    //     username = 'group';
+    //     lineurl = 'NA';
+    //   } else if (bodyResponse.events[0].source.type === 'room') {
+    //     Lineid = bodyResponse.events[0].source.roomId;
+    //     username = 'room';
+    //     lineurl = 'NA';
+    //   }
+    //   // num = " ประเภท = "+ num +" userId =" + Lineid + "Phone_No =" + phonenumber 
 
-      try {
-        RequestService.post({
-          "headers": { "content-type": "application/json" },
-          "url": "https://feeddev-line.cpf.co.th/FeedRegisterLineBot/api/Register",
-          "body": JSON.stringify({
-            "User_ID": Lineid,
-            "Phone_No": phonenumber,
-            "Email": lineurl,
-            "Nameline": username
-          })
-        }, (error, response, body) => {
-          if (error) {
-            console.dir(error);
-            return error;
-          } else {
-            // console.log('log body',JSON.parse(body));
-            console.dir(JSON.parse(body));
-            num = num + JSON.parse(body);
-            console.log('log num', num);
-            console.log("Call service pass")
-            send(reply_token, num)
-          }
-        });
-      } catch (e) {
-        console.log(e);
-        err = e
-        num = num + "เข้า" + err
-      }
-      finally {
-        num = "หมายเลข : " + phonenumber + " "
-      }
-      // console.log('log2 num',num);
-      // send(reply_token, num)
-    }
+    //   try {
+    //     RequestService.post({
+    //       "headers": { "content-type": "application/json" },
+    //       "url": "https://feeddev-line.cpf.co.th/FeedRegisterLineBot/api/Register",
+    //       "body": JSON.stringify({
+    //         "User_ID": Lineid,
+    //         "Phone_No": phonenumber,
+    //         "Email": lineurl,
+    //         "Nameline": username
+    //       })
+    //     }, (error, response, body) => {
+    //       if (error) {
+    //         console.dir(error);
+    //         return error;
+    //       } else {
+    //         // console.log('log body',JSON.parse(body));
+    //         console.dir(JSON.parse(body));
+    //         num = num + JSON.parse(body);
+    //         console.log('log num', num);
+    //         console.log("Call service pass")
+    //         send(reply_token, num)
+    //       }
+    //     });
+    //   } catch (e) {
+    //     console.log(e);
+    //     err = e
+    //     num = num + "เข้า" + err
+    //   }
+    //   finally {
+    //     num = "หมายเลข : " + phonenumber + " "
+    //   }
+    //   // console.log('log2 num',num);
+    //   // send(reply_token, num)
+    // }
 
     async function main() {
       liff.ready.then(() => {
