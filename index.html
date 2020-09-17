@@ -222,20 +222,20 @@
       document.getElementById("roomId").append(liff.getContext().roomId)
       document.getElementById("groupId").append(liff.getContext().groupId)
       var x = document.getElementById("type").value
-      document.getElementById("ID").value = x
+     
 
      
 
-      if (x.value == "external"){
+      if (x.value == "undefined"){
         document.getElementById("ID").value="0"
 
-      }else if(x.text =="group"){
+      }else if(x.value =="group"){
         
         document.getElementById("ID").append(liff.getContext().groupId)
-      }else if(x.text =="roomId"){
+      }else if(x.value =="roomId"){
   
         document.getElementById("ID").append(liff.getContext().roomId)
-      }else if(x.text =="utouId"){
+      }else if(x.value =="utouId"){
         
         document.getElementById("ID").append(liff.getContext().utouId)
       }
