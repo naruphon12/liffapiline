@@ -110,10 +110,7 @@
       <button type="submit">ลงทะเบียน</button>
     
     </div>
-
     <div class="container" style="background-color:#f1f1f1">
-      <button type="button" class="cancelbtn">Cancel</button>
-      <span class="psw">Forgot <a href="#">password?</a></span>
     </div>
   </form>
 
@@ -122,12 +119,9 @@
   <p id="version"><b>Version:</b> </p>
   <p id="isInClient"><b>isInClient:</b> </p>
   <p id="accessToken"><b>AccessToken:</b> </p>
-  <!-- <img id="pictureUrl" > -->
-  <!-- <p id="userId"><b>userId:</b> </p> -->
-  <!-- <p id="displayName"><b>displayName:</b> </p> -->
+ 
   <p id="statusMessage"><b>statusMessage:</b> </p>
-  <!-- <p id="email"><b>email:</b> </p> -->
-  <!-- <p id="type"><b>type:</b> </p> -->
+ 
   <p id="viewType"><b>viewType:</b> </p>
   <p id="utouId"><b>utouId:</b> </p>
   <p id="roomId"><b>roomId:</b> </p>
@@ -221,23 +215,24 @@
    
 
     function getContext() {
-
+      
       document.getElementById("type").append(liff.getContext().type)
       document.getElementById("viewType").append(liff.getContext().viewType)
       document.getElementById("utouId").append(liff.getContext().utouId)
       document.getElementById("roomId").append(liff.getContext().roomId)
       document.getElementById("groupId").append(liff.getContext().groupId)
+      var x = document.getElementById("type")
 
-      if (liff.getContext().type.value = "external"){
+      if (x.text = "external"){
         document.getElementById("ID").value="0"
 
-      }else if(liff.getContext().type.value = "group"){
+      }else if(x.text ="group"){
         
         document.getElementById("ID").append(liff.getContext().groupId)
-      }else if(liff.getContext().type.value = "roomId"){
+      }else if(x.text ="roomId"){
   
         document.getElementById("ID").append(liff.getContext().roomId)
-      }else if(liff.getContext().type.value = "utouId"){
+      }else if(x.text ="utouId"){
         
         document.getElementById("ID").append(liff.getContext().utouId)
       }
@@ -272,8 +267,6 @@
         document.getElementById("btnClose").style.display = "none"
       }
     }
-
-
     // const express = require('express')
     // const bodyParser = require('body-parser')
     // const request = require('request')
