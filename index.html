@@ -154,12 +154,19 @@ if (!friend.friendFlag){
     }
 
     async function main() {
+      liff.ready.then(() => {
+        document.getElementById("isLoggedIn").append(liff.isLoggedIn())
+        if (liff.isLoggedIn()) {
+          getEnvironment()
+          getUserProfile()
+          getContext()
+          getFriendship()
+          createUniversalLink()
+        } else {
+          liff.login()
+        }
+      })
       await liff.init({ liffId: "1653805513-dL6z6po1" })
-      getEnvironment()
-      getUserProfile()
-      getContext()
-      getFriendship()
-      createUniversalLink()
     }
     main()
   </script>
