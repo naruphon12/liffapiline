@@ -223,16 +223,16 @@
       document.getElementById("groupId").append(liff.getContext().groupId)
       var x = document.getElementById("type")
 
-      if (x.text = "external"){
+      if (x.value == "external"){
         document.getElementById("ID").value="0"
 
-      }else if(x.text ="group"){
+      }else if(x.text =="group"){
         
         document.getElementById("ID").append(liff.getContext().groupId)
-      }else if(x.text ="roomId"){
+      }else if(x.text =="roomId"){
   
         document.getElementById("ID").append(liff.getContext().roomId)
-      }else if(x.text ="utouId"){
+      }else if(x.text =="utouId"){
         
         document.getElementById("ID").append(liff.getContext().utouId)
       }
