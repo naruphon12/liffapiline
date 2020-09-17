@@ -5,7 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
   <title>My LIFF app</title>
-  <link rel="stylesheet" href="css/style.css" media="all">
+  <!-- <link rel="stylesheet" href="css/style.css" media="all"> -->
+  <script>
+    document.write('<link rel="stylesheet" href="css/style.css?cache='+ new Date().getTime()+'">')
+    </script>
 </head>
 
 <body>
@@ -39,11 +42,12 @@
   <button id="btnLogOut" onclick="logOut()">Log Out</button>
   <button id="btnClose" onclick="closed()">Close</button>
 
-  <!-- <script src="js/vconsole.min.js"></script> -->
-  <!-- <script>
+  <script src="js/vconsole.min.js"></script>
+  <script>
     var vConsole = new VConsole()
     console.log("Hello World!")
-  </script> -->
+
+  </script>
 
   <script src="https://static.line-scdn.net/liff/edge/versions/2.4.0/sdk.js"></script>
   <script>
@@ -87,13 +91,13 @@
     }
 
     async function getFriendship() {
-const friend=await liff.getFriendship()
-document.getElementById("friendship").append(friend.friendFlag)
-if (!friend.friendFlag){
-  if(confirm("คุรยังไม่ได้เพิ่ม Bot เป็นเพื่อน จะเพิ่มเลยไหม?")){
-    window.location="https://line.me/R/ti/p/@119ajkrj"
-  }
-}
+      const friend = await liff.getFriendship()
+      document.getElementById("friendship").append(friend.friendFlag)
+      if (!friend.friendFlag) {
+        if (confirm("คุรยังไม่ได้เพิ่ม Bot เป็นเพื่อน จะเพิ่มเลยไหม?")) {
+          window.location = "https://line.me/R/ti/p/@119ajkrj"
+        }
+      }
 
     }
 
@@ -131,11 +135,7 @@ if (!friend.friendFlag){
       statusMessage.innerHTML = "<b>statusMessage:</b> " + profile.statusMessage
       displayName.innerHTML = "<b>displayName:</b> " + profile.displayName
       email.innerHTML = "<b>email:</b> " + liff.getDecodedIDToken().email
-      //  document.getElementById("pictureUrl").src=profile.pictureUrl
-      //  document.getElementById("userId").append(profile.userId)
-      //  document.getElementById("statusMessage").append(profile.statusMessage)
-      //  document.getElementById("displayName").append(profile.displayName)
-      //  document.getElementById("statusMessage").append
+    
     }
 
     function getEnvironment() {
