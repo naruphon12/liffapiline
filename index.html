@@ -98,7 +98,7 @@
       <label for="psw" id="email"><b>email :</b></label><br>
       <br>
 
-      <label for="psw" id="Grouptype"><b>Group type :</b></label><br>
+      <label for="psw" id="type"><b>Group type :</b></label><br>
       <br>
 
       <label for="psw" id="ID" ><b>ID :</b></label><br>
@@ -229,17 +229,18 @@
       document.getElementById("utouId").append(liff.getContext().utouId)
       document.getElementById("roomId").append(liff.getContext().roomId)
       document.getElementById("groupId").append(liff.getContext().groupId)
-      if (liff.getContext().utouId.text == "undefined" & liff.getContext().roomId.text =="undefined"  & liff.getContext().groupId.text =="undefined"){
-        document.getElementById("Grouptype")="undefined"
-        document.getElementById("ID")="0"
-      }else if(liff.getContext().utouId.text == "undefined" & liff.getContext().roomId.text =="undefined"  & liff.getContext().groupId.text !=="undefined"){
-        document.getElementById("Grouptype")="groupId"
+
+      if (liff.getContext().type = "external"){
+        document.getElementById("ID").value="0"
+        
+      }else if(liff.getContext().type = "group"){
+        
         document.getElementById("ID").append(liff.getContext().groupId)
-      }else if(liff.getContext().utouId.text == "undefined" & liff.getContext().roomId.text !=="undefined"  & liff.getContext().groupId.text =="undefined"){
-        document.getElementById("Grouptype")="roomId"
+      }else if(liff.getContext().type = "roomId"){
+  
         document.getElementById("ID").append(liff.getContext().roomId)
-      }else if(liff.getContext().utouId.text !== "undefined" & liff.getContext().roomId.text =="undefined"  & liff.getContext().groupId.text =="undefined"){
-        document.getElementById("Grouptype")="utouId"
+      }else if(liff.getContext().type = "utouId"){
+        
         document.getElementById("ID").append(liff.getContext().utouId)
       }
     }
