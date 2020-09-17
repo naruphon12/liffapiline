@@ -221,7 +221,10 @@
       document.getElementById("utouId").append(liff.getContext().utouId)
       document.getElementById("roomId").append(liff.getContext().roomId)
       document.getElementById("groupId").append(liff.getContext().groupId)
-      var x = document.getElementById("type")
+      var x = document.getElementById("type").value
+      document.getElementById("ID").innerHTML = x
+
+     
 
       if (x.value == "external"){
         document.getElementById("ID").value="0"
