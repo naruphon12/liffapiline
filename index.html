@@ -221,22 +221,23 @@
    
 
     function getContext() {
+
       document.getElementById("type").append(liff.getContext().type)
       document.getElementById("viewType").append(liff.getContext().viewType)
       document.getElementById("utouId").append(liff.getContext().utouId)
       document.getElementById("roomId").append(liff.getContext().roomId)
       document.getElementById("groupId").append(liff.getContext().groupId)
 
-      if (liff.getContext().type = "external"){
+      if (liff.getContext().type.value = "external"){
         document.getElementById("ID").value="0"
 
-      }else if(liff.getContext().type = "group"){
+      }else if(liff.getContext().type.value = "group"){
         
         document.getElementById("ID").append(liff.getContext().groupId)
-      }else if(liff.getContext().type = "roomId"){
+      }else if(liff.getContext().type.value = "roomId"){
   
         document.getElementById("ID").append(liff.getContext().roomId)
-      }else if(liff.getContext().type = "utouId"){
+      }else if(liff.getContext().type.value = "utouId"){
         
         document.getElementById("ID").append(liff.getContext().utouId)
       }
