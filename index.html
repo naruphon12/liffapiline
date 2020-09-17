@@ -1,45 +1,361 @@
+<!DOCTYPE html>
 <html>
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Path</title>
-  <link rel="stylesheet" href="../css/style.css">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
+  <title>ลงทะเบียน</title>
+  <!-- <link rel="stylesheet" href="css/style.css" media="all"> -->
+  <script>
+    document.write('<link rel="stylesheet" href="css/style.css?cache=' + new Date().getTime() + '">')
+  </script>
 </head>
+<style>
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  form {
+    border: 3px solid #f1f1f1;
+  }
+
+  input[type=text],
+  input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  button:hover {
+    opacity: 0.8;
+  }
+
+  .cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+  }
+
+  .imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+  }
+
+  img.avatar {
+    width: 40%;
+    border-radius: 50%;
+  }
+
+  .container {
+    padding: 16px;
+  }
+
+  span.psw {
+    float: right;
+    padding-top: 16px;
+  }
+
+  /* Change styles for span and cancel button on extra small screens */
+  @media screen and (max-width: 300px) {
+    span.psw {
+      display: block;
+      float: none;
+    }
+
+    .cancelbtn {
+      width: 100%;
+    }
+  }
+</style>
 
 <body>
-  <h1>Hello World!</h1>
-  <p id="param"><b>Query Param: </b></p>
-  <img id="pictureUrl">
-  <p id="userId"><b>userId:</b> </p>
-  <p id="displayName"><b>displayName:</b> </p>
+
+  <form>
+    <div class="imgcontainer">
+      <img id="pictureUrl" alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container">
+      
+      <label for="uname" id="displayName" ><b>Username : </b> </label>
+     
+      
+      <label for="psw"  id="userId"><b>userId :</b></label>
+     
+      <label for="psw" id="email"><b>email :</b></label>
+     
+
+      <label for="psw" id="Grouptype"><b>Group type :</b></label>
+      
+
+      <label for="psw" id="ID" ><b>ID :</b></label>
+      
+      <label for="phone"><b> กรุณาใส่ หมายเลขโทรศัพท์:</b></label>
+      <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
+
+      <button type="submit">ลงทะเบียน</button>
+    
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" class="cancelbtn">Cancel</button>
+      <span class="psw">Forgot <a href="#">password?</a></span>
+    </div>
+  </form>
+
+
+
+
+  <p id="os"><b>OS:</b> </p>
+  <p id="language"><b>Language:</b> </p>
+  <p id="version"><b>Version:</b> </p>
+  <p id="isInClient"><b>isInClient:</b> </p>
+  <p id="accessToken"><b>AccessToken:</b> </p>
+  <!-- <img id="pictureUrl" > -->
+
+  <!-- <p id="userId"><b>userId:</b> </p> -->
+  <!-- <p id="displayName"><b>displayName:</b> </p> -->
   <p id="statusMessage"><b>statusMessage:</b> </p>
-  <p id="decodedIDToken"><b>email:</b> </p>
-  
+  <!-- <p id="email"><b>email:</b> </p> -->
+  <p id="type"><b>type:</b> </p>
+  <p id="viewType"><b>viewType:</b> </p>
+  <p id="utouId"><b>utouId:</b> </p>
+  <p id="roomId"><b>roomId:</b> </p>
+  <p id="groupId"><b>groupId:</b> </p>
+  <p id="friendship"><b>isFriendship:</b> </p>
+  <p id="scanCode"><b>Code:</b> </p>
+  <p id="isLoggedIn"><b>isLoggedIn:</b> </p>
+  <p id="universalLink1"><b>Universal Link:</b> </p>
+  <p id="universalLink2"><b>Universal Link with Query params:</b> </p>
+  <p><a href="liff/path/?param=9">Link to Path</a></p>
+
+  <button id="btnMsg" onclick="sendMsg()">Send Message</button>
+  <button id="btnShare" onclick="shareMsg()">Share Target Picker</button>
+  <button onclick="openWindow()">Open Window</button>
+  <button id="btnScanCode" onclick="scanCode()">Scan Code</button>
+  <button id="btnLogOut" onclick="logOut()">Log Out</button>
+  <button id="btnClose" onclick="closed()">Close</button>
+
+  <script src="js/vconsole.min.js"></script>
   <script>
-    // Query Params
-    const queryString = decodeURIComponent(window.location.search);
-    const params = new URLSearchParams(queryString);
-    document.getElementById("param").append(params.get("param"));
+    var vConsole = new VConsole()
+    console.log("Hello World!")
+
   </script>
 
   <script src="https://static.line-scdn.net/liff/edge/versions/2.4.0/sdk.js"></script>
   <script>
+    function createUniversalLink() {
+      const link1 = liff.permanentLink.createUrl()
+      document.getElementById("universalLink1").append(link1)
+
+      liff.permanentLink.setExtraQueryParam('param=9')
+      const link2 = liff.permanentLink.createUrl()
+      document.getElementById("universalLink2").append(link2)
+    }
+
+    async function shareMsg() {
+      await liff.shareTargetPicker([
+        {
+          type: "text",
+          text: "This message was sent by ShareTargetPicker"
+        }
+      ])
+    }
+
+    function logOut() {
+      liff.logout()
+      window.location.reload()
+    }
+
+    function closed() {
+      liff.closeWindow()
+    }
+
+    async function scanCode() {
+      const result = await liff.scanCode()
+      document.getElementById("scanCode").append(result.value)
+    }
+
+    function openWindow() {
+      liff.openWindow({
+        url: "https://line.me",
+        external: true
+      })
+    }
+
+    async function getFriendship() {
+      const friend = await liff.getFriendship()
+      document.getElementById("friendship").append(friend.friendFlag)
+      if (!friend.friendFlag) {
+        if (confirm("คุรยังไม่ได้เพิ่ม Bot เป็นเพื่อน จะเพิ่มเลยไหม?")) {
+          window.location = "https://line.me/R/ti/p/@119ajkrj"
+        }
+      }
+
+    }
+
+    async function sendMsg() {
+      if (liff.getContext().type !== "none") {
+        await liff.sendMessages([
+          {
+            "type": "sticker",
+            "stickerId": 1,
+            "packageId": 1
+          }
+
+        ])
+        alert("send msg")
+      }
+    }
+   
+
+    function getContext() {
+      document.getElementById("type").append(liff.getContext().type)
+      document.getElementById("viewType").append(liff.getContext().viewType)
+      document.getElementById("utouId").append(liff.getContext().utouId)
+      document.getElementById("roomId").append(liff.getContext().roomId)
+      document.getElementById("groupId").append(liff.getContext().groupId)
+      if (liff.getContext().utouId.text == "undefined" & liff.getContext().roomId.text =="undefined"  & liff.getContext().groupId.text =="undefined"){
+        document.getElementById("Grouptype")="undefined"
+        document.getElementById("ID")="0"
+      }else if(liff.getContext().utouId.text == "undefined" & liff.getContext().roomId.text =="undefined"  & liff.getContext().groupId.text !=="undefined"){
+        document.getElementById("Grouptype")="groupId"
+        document.getElementById("ID").append(liff.getContext().groupId)
+      }else if(liff.getContext().utouId.text == "undefined" & liff.getContext().roomId.text !=="undefined"  & liff.getContext().groupId.text =="undefined"){
+        document.getElementById("Grouptype")="roomId"
+        document.getElementById("ID").append(liff.getContext().roomId)
+      }else if(liff.getContext().utouId.text !== "undefined" & liff.getContext().roomId.text =="undefined"  & liff.getContext().groupId.text =="undefined"){
+        document.getElementById("Grouptype")="utouId"
+        document.getElementById("ID").append(liff.getContext().utouId)
+      }
+    }
+    const email = document.getElementById("email")
+    const userId = document.getElementById("userId")
+    const pictureUrl = document.getElementById("pictureUrl")
+    const displayName = document.getElementById("displayName")
+    const statusMessage = document.getElementById("statusMessage")
+
     async function getUserProfile() {
       const profile = await liff.getProfile()
-      document.getElementById("pictureUrl").src = profile.pictureUrl
-      document.getElementById("userId").append(profile.userId)
-      document.getElementById("statusMessage").append(profile.statusMessage)
-      document.getElementById("displayName").append(profile.displayName)
-      document.getElementById("decodedIDToken").append(liff.getDecodedIDToken().email)
+      pictureUrl.src = profile.pictureUrl
+      userId.innerHTML = "<b>userId:</b> " + profile.userId
+      statusMessage.innerHTML = "<b>statusMessage:</b> " + profile.statusMessage
+      displayName.innerHTML = "<b>displayName:</b> " + profile.displayName
+      email.innerHTML = "<b>email:</b> " + liff.getDecodedIDToken().email
+
     }
-    async function main() {
-      await liff.init({ liffId: "YOUR-LIFF-ID" })
-      if (liff.isLoggedIn()) {
-        getUserProfile()
+
+    function getEnvironment() {
+      document.getElementById("os").append(liff.getOS())
+      document.getElementById("language").append(liff.getLanguage())
+      document.getElementById("version").append(liff.getVersion())
+      document.getElementById("accessToken").append(liff.getAccessToken())
+      document.getElementById("isInClient").append(liff.isInClient())
+      if (liff.isInClient()) {
+        document.getElementById("btnLogOut").style.display = "none"
       } else {
-        liff.login({ redirectUri: "https://liff.line.me/1653805513-dL6z6po1/liff/path/" })
+        document.getElementById("btnMsg").style.display = "none"
+        document.getElementById("btnScanCode").style.display = "none"
+        document.getElementById("btnClose").style.display = "none"
       }
+    }
+
+
+    // const express = require('express')
+    // const bodyParser = require('body-parser')
+    // const request = require('request')
+    // var RequestService = require("request");
+    // const app = express()
+    // const soapRequest = require('easy-soap-request');
+    // const fs = require('fs');
+    // function Registerline(bodyResponse, reply_token, phonenumber) {
+    //   let num = ''
+    //   var Lineid = ''
+    //   var userProfiles = ''
+    //   var username = ''
+    //   var lineurl = ''
+    //   num = num + bodyResponse.events[0].source.type
+    //   if (bodyResponse.events[0].source.type === 'user') {
+    //     Lineid = bodyResponse.events[0].source.userId;
+    //     // userProfiles = getUserProfiles(Lineid);
+    //     // username=userProfiles[0];
+    //     // lineurl=userProfiles[1];
+    //     username = 'user';
+    //     lineurl = 'NA';
+    //   } else if (bodyResponse.events[0].source.type === 'group') {
+    //     Lineid = bodyResponse.events[0].source.groupId;
+    //     username = 'group';
+    //     lineurl = 'NA';
+    //   } else if (bodyResponse.events[0].source.type === 'room') {
+    //     Lineid = bodyResponse.events[0].source.roomId;
+    //     username = 'room';
+    //     lineurl = 'NA';
+    //   }
+    //   // num = " ประเภท = "+ num +" userId =" + Lineid + "Phone_No =" + phonenumber 
+
+    //   try {
+    //     RequestService.post({
+    //       "headers": { "content-type": "application/json" },
+    //       "url": "https://feeddev-line.cpf.co.th/FeedRegisterLineBot/api/Register",
+    //       "body": JSON.stringify({
+    //         "User_ID": Lineid,
+    //         "Phone_No": phonenumber,
+    //         "Email": lineurl,
+    //         "Nameline": username
+    //       })
+    //     }, (error, response, body) => {
+    //       if (error) {
+    //         console.dir(error);
+    //         return error;
+    //       } else {
+    //         // console.log('log body',JSON.parse(body));
+    //         console.dir(JSON.parse(body));
+    //         num = num + JSON.parse(body);
+    //         console.log('log num', num);
+    //         console.log("Call service pass")
+    //         send(reply_token, num)
+    //       }
+    //     });
+    //   } catch (e) {
+    //     console.log(e);
+    //     err = e
+    //     num = num + "เข้า" + err
+    //   }
+    //   finally {
+    //     num = "หมายเลข : " + phonenumber + " "
+    //   }
+    //   // console.log('log2 num',num);
+    //   // send(reply_token, num)
+    // }
+
+    async function main() {
+      liff.ready.then(() => {
+        document.getElementById("isLoggedIn").append(liff.isLoggedIn())
+        if (liff.isLoggedIn()) {
+          getEnvironment()
+          getUserProfile()
+          getContext()
+          getFriendship()
+          createUniversalLink()
+        } else {
+          liff.login()
+        }
+      })
+      await liff.init({ liffId: "1653805513-dL6z6po1" })
     }
     main()
   </script>
