@@ -13,6 +13,7 @@
   <p id="isInClient"><b>isInClient:</b> </p>
   <p id="accessToken"><b>AccessToken:</b> </p>
   <img id="pictureUrl">
+  <p id="email"><b>email:</b> </p>
   <p id="userId"><b>userId:</b> </p>
   <p id="displayName"><b>displayName:</b> </p>
   <p id="statusMessage"><b>statusMessage:</b> </p>
@@ -71,14 +72,24 @@
     function getContext() {
 
     }
+    const email = document.getElementById("email")
+    const userId = document.getElementById("userId")
+    const pictureUrl = document.getElementById("pictureUrl")
+    const displayName = document.getElementById("displayName")
+    const statusMessage = document.getElementById("statusMessage")
 
     async function getUserProfile() {
       const profile = await liff.getProfile()
-     document.getElementById("pictureUrl").src=profile.pictureUrl
-     document.getElementById("userId").append(profile.userId)
-     document.getElementById("statusMessage").append(profile.statusMessage)
-     document.getElementById("displayName").append(profile.displayName)
-
+      pictureUrl.src = profile.pictureUrl
+      userId.innerHTML = "<b>userId:</b> " + profile.userId
+      statusMessage.innerHTML = "<b>statusMessage:</b> " + profile.statusMessage
+      displayName.innerHTML = "<b>displayName:</b> " + profile.displayName
+      email.innerHTML = "<b>email:</b> " + liff.getDecodedIDToken().email
+    //  document.getElementById("pictureUrl").src=profile.pictureUrl
+    //  document.getElementById("userId").append(profile.userId)
+    //  document.getElementById("statusMessage").append(profile.statusMessage)
+    //  document.getElementById("displayName").append(profile.displayName)
+    //  document.getElementById("statusMessage").append
     }
 
     function getEnvironment() {
