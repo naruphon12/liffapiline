@@ -107,8 +107,8 @@
       <br>
       <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
 
-      <button type="submit" >ลงทะเบียน</button>
-    
+      <button type="submit"  onclick="Registerline()">ลงทะเบียน</button>
+      <button id="btnClose" onclick="closed()">Close</button>
     </div>
     <div class="container" style="background-color:#f1f1f1">
     </div>
@@ -138,7 +138,7 @@
   <button onclick="openWindow()" style="display:none;">Open Window</button>
   <button id="btnScanCode" onclick="scanCode()" style="display:none;">Scan Code</button>
   <button id="btnLogOut" onclick="logOut()" style="display:none;">Log Out</button>
-  <button id="btnClose" onclick="closed()">Close</button>
+  <!-- <button id="btnClose" onclick="closed()">Close</button> -->
 
   <script src="js/vconsole.min.js"></script>
   <script>
@@ -223,9 +223,6 @@
       document.getElementById("groupId").append(liff.getContext().groupId)
       var x = document.getElementById("type").value
      
-
-     
-      
       if (liff.getContext().type == "external") {
         
         document.getElementById("ID").append(liff.getContext().groupId)
@@ -271,14 +268,16 @@
         document.getElementById("btnClose").style.display = "none"
       }
     }
+
     // const express = require('express')
     // const bodyParser = require('body-parser')
     // const request = require('request')
     // var RequestService = require("request");
     // const app = express()
-    // const soapRequest = require('easy-soap-request');
-    // const fs = require('fs');
-    // function Registerline(bodyResponse, reply_token, phonenumber) {
+    // const soapRequest = require('easy-soap-request')
+    // const fs = require('fs')
+
+    // function Registerline() {
     //   let num = ''
     //   var Lineid = ''
     //   var userProfiles = ''
@@ -287,9 +286,7 @@
     //   num = num + bodyResponse.events[0].source.type
     //   if (bodyResponse.events[0].source.type === 'user') {
     //     Lineid = bodyResponse.events[0].source.userId;
-    //     // userProfiles = getUserProfiles(Lineid);
-    //     // username=userProfiles[0];
-    //     // lineurl=userProfiles[1];
+    
     //     username = 'user';
     //     lineurl = 'NA';
     //   } else if (bodyResponse.events[0].source.type === 'group') {
@@ -301,7 +298,7 @@
     //     username = 'room';
     //     lineurl = 'NA';
     //   }
-    //   // num = " ประเภท = "+ num +" userId =" + Lineid + "Phone_No =" + phonenumber 
+    
 
     //   try {
     //     RequestService.post({
@@ -318,12 +315,13 @@
     //         console.dir(error);
     //         return error;
     //       } else {
-    //         // console.log('log body',JSON.parse(body));
+           
     //         console.dir(JSON.parse(body));
     //         num = num + JSON.parse(body);
     //         console.log('log num', num);
     //         console.log("Call service pass")
     //         send(reply_token, num)
+    //         sendMsg()
     //       }
     //     });
     //   } catch (e) {
@@ -334,8 +332,7 @@
     //   finally {
     //     num = "หมายเลข : " + phonenumber + " "
     //   }
-    //   // console.log('log2 num',num);
-    //   // send(reply_token, num)
+     
     // }
 
     async function main() {
