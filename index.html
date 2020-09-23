@@ -95,6 +95,7 @@
       
       <label for="psw"  id="userId"><b>userId :</b></label><br>
       <br>
+
       <label for="psw" id="email"><b>email :</b></label><br>
       <br>
 
@@ -103,8 +104,11 @@
 
       <label for="psw" id="ID" ><b>ID :</b></label><br>
       <br>
-      <label for="phone"><b> กรุณาใส่ หมายเลขโทรศัพท์:</b></label><br>
+
+      <label for="phone" ><b> กรุณาใส่ หมายเลขโทรศัพท์:</b></label><br>
+
       <br>
+
       <input type="tel" id="phone" name="phone" pattern="[0-9]{10}">
 
       <button type="submit"  onclick="Registerline()">ลงทะเบียน</button>
@@ -119,9 +123,7 @@
   <p id="version" style="display:none;"><b>Version:</b> </p>
   <p id="isInClient" style="display:none;"><b>isInClient:</b> </p>
   <p id="accessToken" style="display:none;"><b>AccessToken:</b> </p>
- 
   <p id="statusMessage" style="display:none;"><b>statusMessage:</b> </p>
- 
   <p id="viewType" style="display:none;"><b>viewType:</b> </p>
   <p id="utouId" style="display:none;"><b>utouId:</b> </p>
   <p id="roomId" style="display:none;"><b>roomId:</b> </p>
@@ -133,6 +135,7 @@
   <p id="universalLink2" style="display:none;"><b>Universal Link with Query params:</b> </p>
   <p><a href="liff/path/?param=9" style="display:none;">Link to Path</a></p>
 
+  
   <button id="btnMsg" onclick="sendMsg()" style="display:none;">Send Message</button>
   <button id="btnShare" onclick="shareMsg()" style="display:none;">Share Target Picker</button>
   <button onclick="openWindow()" style="display:none;">Open Window</button>
@@ -221,8 +224,7 @@
       document.getElementById("utouId").append(liff.getContext().utouId)
       document.getElementById("roomId").append(liff.getContext().roomId)
       document.getElementById("groupId").append(liff.getContext().groupId)
-      var x = document.getElementById("type").value
-     
+   
       if (liff.getContext().type == "external") {
         
         document.getElementById("ID").append(liff.getContext().groupId)
@@ -238,6 +240,7 @@
         document.getElementById("ID").append(liff.getContext().utouId)
       }
     }
+
     const email = document.getElementById("email")
     const userId = document.getElementById("userId")
     const pictureUrl = document.getElementById("pictureUrl")
@@ -251,7 +254,6 @@
       statusMessage.innerHTML = "<b>statusMessage:</b> " + profile.statusMessage
       displayName.innerHTML = "<b>displayName:</b> " + profile.displayName
       email.innerHTML = "<b>email:</b> " + liff.getDecodedIDToken().email
-
     }
 
     function getEnvironment() {
@@ -269,71 +271,78 @@
       }
     }
 
-    // const express = require('express')
-    // const bodyParser = require('body-parser')
-    // const request = require('request')
-    // var RequestService = require("request");
-    // const app = express()
-    // const soapRequest = require('easy-soap-request')
-    // const fs = require('fs')
+    const express = require('express')
+    const bodyParser = require('body-parser')
+    const request = require('request')
+    var RequestService = require("request");
+    const app = express()
+    const soapRequest = require('easy-soap-request')
+    const fs = require('fs')
 
-    // function Registerline() {
-    //   let num = ''
-    //   var Lineid = ''
-    //   var userProfiles = ''
-    //   var username = ''
-    //   var lineurl = ''
-    //   num = num + bodyResponse.events[0].source.type
-    //   if (bodyResponse.events[0].source.type === 'user') {
-    //     Lineid = bodyResponse.events[0].source.userId;
-    
-    //     username = 'user';
-    //     lineurl = 'NA';
-    //   } else if (bodyResponse.events[0].source.type === 'group') {
-    //     Lineid = bodyResponse.events[0].source.groupId;
-    //     username = 'group';
-    //     lineurl = 'NA';
-    //   } else if (bodyResponse.events[0].source.type === 'room') {
-    //     Lineid = bodyResponse.events[0].source.roomId;
-    //     username = 'room';
-    //     lineurl = 'NA';
-    //   }
-    
+    function Registerline() {
+      let num = ''
+      var Lineid = ''
+      var userProfiles = ''
+      var username = ''
+      var lineurl = ''
+      var phone=''
+      num = num + document.getElementById("type")
+      username=document.getElementById("displayName")
+      if (liff.getContext().type == "external") {
+        
+        document.getElementById("ID").append(liff.getContext().utouId)
+        Lineid=document.getElementById("ID")
+        lineurl =  document.getElementById("email")
+      }else if(liff.getContext().type  =="group"){
+      
+        document.getElementById("ID").append(liff.getContext().groupId)
+        Lineid=document.getElementById("ID")
+        lineurl =  document.getElementById("email")
+      }else if(liff.getContext().type == "room"){
+       
+        document.getElementById("ID").append(liff.getContext().roomId)
+        Lineid=document.getElementById("ID")
+        lineurl =  document.getElementById("email")
+      }else if(liff.getContext().type == "utou"){
+        
+        document.getElementById("ID").append(liff.getContext().utouId)
+        Lineid=document.getElementById("ID")
+        lineurl =  document.getElementById("email")
+      }
+      phone=document.getElementById("phone")
+      try {
+        RequestService.post({
+          "headers": { "content-type": "application/json" },
+          "url": "https://feeddev-line.cpf.co.th/FeedRegisterLineBot/api/Register",
+          "body": JSON.stringify({
+            "User_ID": Lineid,
+            "Phone_No": phone,
+            "Email": lineurl,
+            "Nameline": username
+          })
+        }, (error, response, body) => {
+          if (error) {
+            console.dir(error);
+            return error;
+          } else {
+            console.dir(JSON.parse(body));
+            num = num + JSON.parse(body);
+            console.log('log num', num);
+            console.log("Call service pass")
+            // send(reply_token, num)
+            sendMsg()
+          }
+        });
+      } catch (e) {
+        console.log(e);
+        err = e
+        num = num + "เข้า" + err
+      }
+      finally {
+        num = "หมายเลข : " + phonenumber + " "
+      }
+    }
 
-    //   try {
-    //     RequestService.post({
-    //       "headers": { "content-type": "application/json" },
-    //       "url": "https://feeddev-line.cpf.co.th/FeedRegisterLineBot/api/Register",
-    //       "body": JSON.stringify({
-    //         "User_ID": Lineid,
-    //         "Phone_No": phonenumber,
-    //         "Email": lineurl,
-    //         "Nameline": username
-    //       })
-    //     }, (error, response, body) => {
-    //       if (error) {
-    //         console.dir(error);
-    //         return error;
-    //       } else {
-           
-    //         console.dir(JSON.parse(body));
-    //         num = num + JSON.parse(body);
-    //         console.log('log num', num);
-    //         console.log("Call service pass")
-    //         send(reply_token, num)
-    //         sendMsg()
-    //       }
-    //     });
-    //   } catch (e) {
-    //     console.log(e);
-    //     err = e
-    //     num = num + "เข้า" + err
-    //   }
-    //   finally {
-    //     num = "หมายเลข : " + phonenumber + " "
-    //   }
-     
-    // }
 
     async function main() {
       liff.ready.then(() => {
