@@ -280,7 +280,7 @@
     // const fs = require('fs')
 
     function Registerline() {
-     
+      const profile = await liff.getProfile()
       let num = ''
       var Lineid = ''
       var userProfiles = ''
@@ -288,29 +288,29 @@
       var lineurl = ''
       var phone=''
       num = num + liff.getContext().type
-      username=document.getElementById("displayName").value
+      username=profile.displayName
       alert(username +" &&&& "+ num)
 
       if (liff.getContext().type == "external") {
         
         document.getElementById("ID").append(liff.getContext().utouId)
-        Lineid=document.getElementById("ID").value
-        lineurl =  document.getElementById("email").value
+        Lineid=liff.getContext().utouId
+        lineurl =  liff.getDecodedIDToken().email
       }else if(liff.getContext().type  =="group"){
       
         document.getElementById("ID").append(liff.getContext().groupId)
-        Lineid=document.getElementById("ID").value
-        lineurl =  document.getElementById("email").value
+        Lineid=liff.getContext().groupId
+        lineurl =  liff.getDecodedIDToken().email
       }else if(liff.getContext().type == "room"){
        
         document.getElementById("ID").append(liff.getContext().roomId)
-        Lineid=document.getElementById("ID").value
-        lineurl =  document.getElementById("email").value
+        Lineid=liff.getContext().roomId
+        lineurl =  liff.getDecodedIDToken().email
       }else if(liff.getContext().type == "utou"){
         
         document.getElementById("ID").append(liff.getContext().utouId)
-        Lineid=document.getElementById("ID").value
-        lineurl =  document.getElementById("email").value
+        Lineid=liff.getContext().utouId
+        lineurl =  liff.getDecodedIDToken().email
       }
       phone=document.getElementById("phone").value
       alert(phone + " ----"+ Lineid)
