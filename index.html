@@ -288,32 +288,32 @@
       var username = ''
       var lineurl = ''
       var phone=''
-      num = num + document.getElementById("type")
-      username=document.getElementById("displayName")
+      num = num + liff.getContext().type
+      username=document.getElementById("displayName").value
       alert(username + num)
 
       if (liff.getContext().type == "external") {
         
         document.getElementById("ID").append(liff.getContext().utouId)
-        Lineid=document.getElementById("ID")
-        lineurl =  document.getElementById("email")
+        Lineid=document.getElementById("ID").value
+        lineurl =  document.getElementById("email").value
       }else if(liff.getContext().type  =="group"){
       
         document.getElementById("ID").append(liff.getContext().groupId)
-        Lineid=document.getElementById("ID")
-        lineurl =  document.getElementById("email")
+        Lineid=document.getElementById("ID").value
+        lineurl =  document.getElementById("email").value
       }else if(liff.getContext().type == "room"){
        
         document.getElementById("ID").append(liff.getContext().roomId)
-        Lineid=document.getElementById("ID")
-        lineurl =  document.getElementById("email")
+        Lineid=document.getElementById("ID").value
+        lineurl =  document.getElementById("email").value
       }else if(liff.getContext().type == "utou"){
         
         document.getElementById("ID").append(liff.getContext().utouId)
-        Lineid=document.getElementById("ID")
-        lineurl =  document.getElementById("email")
+        Lineid=document.getElementById("ID").value
+        lineurl =  document.getElementById("email").value
       }
-      phone=document.getElementById("phone")
+      phone=document.getElementById("phone").value
       alert(phone + " ----"+ Lineid)
       try {
         RequestService.post({
