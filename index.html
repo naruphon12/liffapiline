@@ -280,7 +280,7 @@
     // const fs = require('fs')
 
     function Registerline() {
-    
+     
       let num = ''
       var Lineid = ''
       var userProfiles = ''
@@ -316,6 +316,7 @@
       alert(phone + " ----"+ Lineid)
       alert(lineurl + " email")
       try {
+        alert("1")
         RequestService.post({
           "headers": { "content-type": "application/json" },
           "url": "https://feeddev-line.cpf.co.th/FeedRegisterLineBot/api/Register",
@@ -325,6 +326,7 @@
             "Email": lineurl,
             "Nameline": username
           })
+          
         }, (error, response, body) => {
           if (error) {
             console.dir(error);
@@ -341,10 +343,12 @@
       } catch (e) {
         console.log(e);
         err = e
+        alert(err)
         num = num + "เข้า" + err
       }
       finally {
         num = "หมายเลข : " + phonenumber + " "
+        alert(num)
       }
     }
 
