@@ -280,8 +280,7 @@
     // const fs = require('fs')
 
     function Registerline() {
-      alert("Registerline")
-
+    
       let num = ''
       var Lineid = ''
       var userProfiles = ''
@@ -290,7 +289,7 @@
       var phone=''
       num = num + liff.getContext().type
       username=document.getElementById("displayName").value
-      alert(username + num)
+      alert(username.value +" &&&& "+ num.value)
 
       if (liff.getContext().type == "external") {
         
@@ -314,7 +313,7 @@
         lineurl =  document.getElementById("email").value
       }
       phone=document.getElementById("phone").value
-      alert(phone + " ----"+ Lineid)
+      alert(phone.value + " ----"+ Lineid.value)
       try {
         RequestService.post({
           "headers": { "content-type": "application/json" },
@@ -328,13 +327,13 @@
         }, (error, response, body) => {
           if (error) {
             console.dir(error);
+            alert("error"+ error)
+
             return error;
           } else {
             console.dir(JSON.parse(body));
             num = num + JSON.parse(body);
-            alert(num)
-            
-            // send(reply_token, num)
+            alert("error"+ num)
             sendMsg()
           }
         });
