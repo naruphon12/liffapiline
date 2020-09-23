@@ -289,7 +289,7 @@
       var phone=''
       num = num + liff.getContext().type
       username=document.getElementById("displayName").value
-      alert(username.value +" &&&& "+ num.value)
+      alert(username +" &&&& "+ num)
 
       if (liff.getContext().type == "external") {
         
@@ -313,7 +313,8 @@
         lineurl =  document.getElementById("email").value
       }
       phone=document.getElementById("phone").value
-      alert(phone.value + " ----"+ Lineid.value)
+      alert(phone + " ----"+ Lineid)
+      alert(lineurl + " email")
       try {
         RequestService.post({
           "headers": { "content-type": "application/json" },
