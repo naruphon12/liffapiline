@@ -280,6 +280,7 @@
     // const fs = require('fs')
 
     function Registerline() {
+      console.log("Registerline")
       let num = ''
       var Lineid = ''
       var userProfiles = ''
@@ -288,6 +289,7 @@
       var phone=''
       num = num + document.getElementById("type")
       username=document.getElementById("displayName")
+      console.log(username)
       if (liff.getContext().type == "external") {
         
         document.getElementById("ID").append(liff.getContext().utouId)
