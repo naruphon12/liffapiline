@@ -281,7 +281,7 @@
 
     function Registerline() {
       alert("Registerline")
-      console.log("Registerline")
+
       let num = ''
       var Lineid = ''
       var userProfiles = ''
@@ -290,7 +290,8 @@
       var phone=''
       num = num + document.getElementById("type")
       username=document.getElementById("displayName")
-      console.log(username)
+      alert(username + num)
+
       if (liff.getContext().type == "external") {
         
         document.getElementById("ID").append(liff.getContext().utouId)
@@ -313,6 +314,7 @@
         lineurl =  document.getElementById("email")
       }
       phone=document.getElementById("phone")
+      alert(phone + " ----"+ Lineid)
       try {
         RequestService.post({
           "headers": { "content-type": "application/json" },
@@ -330,8 +332,8 @@
           } else {
             console.dir(JSON.parse(body));
             num = num + JSON.parse(body);
-            console.log('log num', num);
-            console.log("Call service pass")
+            alert(num)
+            
             // send(reply_token, num)
             sendMsg()
           }
