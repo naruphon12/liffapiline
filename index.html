@@ -21,7 +21,7 @@
 
   input[type=text],
   input[type=password],
-  input[type=tel]{
+  input[type=tel] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -90,11 +90,11 @@
     </div>
 
     <div class="container">
-      
-      <label for="uname" id="displayName" ><b>Username : </b> </label><br>
+
+      <label for="uname" id="displayName"><b>Username : </b> </label><br>
       <br>
-      
-      <label for="psw"  id="userId"><b>userId :</b></label><br>
+
+      <label for="psw" id="userId"><b>userId :</b></label><br>
       <br>
 
       <label for="psw" id="email"><b>email :</b></label><br>
@@ -103,16 +103,16 @@
       <label for="psw" id="type"><b>Group type :</b></label><br>
       <br>
 
-      <label for="psw" id="ID" ><b>ID :</b></label><br>
+      <label for="psw" id="ID"><b>ID :</b></label><br>
       <br>
 
-      <label for="phone" ><b> กรุณาใส่ หมายเลขโทรศัพท์:</b></label><br>
+      <label for="phone"><b> กรุณาใส่ หมายเลขโทรศัพท์:</b></label><br>
 
       <br>
 
       <input type="tel" id="phone" name="phone" pattern="[0-9]{10}">
 
-      <button type="submit"  onclick="Registerline()">ลงทะเบียน</button>
+      <button type="submit" onclick="Registerline()">ลงทะเบียน</button>
       <button id="btnClose" onclick="closed()">Close</button>
     </div>
     <div class="container" style="background-color:#f1f1f1">
@@ -136,7 +136,7 @@
   <p id="universalLink2" style="display:none;"><b>Universal Link with Query params:</b> </p>
   <p><a href="liff/path/?param=9" style="display:none;">Link to Path</a></p>
 
-  
+
   <button id="btnMsg" onclick="sendMsg()" style="display:none;">Send Message</button>
   <button id="btnShare" onclick="shareMsg()" style="display:none;">Share Target Picker</button>
   <button onclick="openWindow()" style="display:none;">Open Window</button>
@@ -152,7 +152,7 @@
   </script>
 
   <script src="callservice.js"></script>
-  
+
 
   <script src="https://static.line-scdn.net/liff/edge/versions/2.4.0/sdk.js"></script>
   <script>
@@ -216,31 +216,34 @@
           }
 
         ])
-        alert("send msg")
+        Swal.fire(
+          "send msg"
+        )
+     
       }
     }
-   
+
 
     function getContext() {
-      
+
       document.getElementById("type").append(liff.getContext().type)
       document.getElementById("viewType").append(liff.getContext().viewType)
       document.getElementById("utouId").append(liff.getContext().utouId)
       document.getElementById("roomId").append(liff.getContext().roomId)
       document.getElementById("groupId").append(liff.getContext().groupId)
-   
+
       if (liff.getContext().type == "external") {
-        
+
         document.getElementById("ID").append(liff.getContext().groupId)
 
-      }else if(liff.getContext().type  =="group"){
-      
+      } else if (liff.getContext().type == "group") {
+
         document.getElementById("ID").append(liff.getContext().groupId)
-      }else if(liff.getContext().type == "room"){
-       
+      } else if (liff.getContext().type == "room") {
+
         document.getElementById("ID").append(liff.getContext().roomId)
-      }else if(liff.getContext().type == "utou"){
-        
+      } else if (liff.getContext().type == "utou") {
+
         document.getElementById("ID").append(liff.getContext().utouId)
       }
     }
@@ -290,37 +293,58 @@
       var userProfiles = ''
       var username = ''
       var lineurl = ''
-      var phone=''
+      var phone = ''
       num = num + liff.getContext().type
-      username=profile.displayName
-      alert(username +" &&&& "+ num)
+      username = profile.displayName
+      Swal.fire(
+        username,
+         + " &&&& ",
+          + num
+        )
+     
 
       if (liff.getContext().type == "external") {
-        
+
         document.getElementById("ID").append(liff.getContext().utouId)
-        Lineid=liff.getContext().utouId
-        lineurl =  liff.getDecodedIDToken().email
-      }else if(liff.getContext().type  =="group"){
-      
+        Lineid = liff.getContext().utouId
+        lineurl = liff.getDecodedIDToken().email
+      } else if (liff.getContext().type == "group") {
+
         document.getElementById("ID").append(liff.getContext().groupId)
-        Lineid=liff.getContext().groupId
-        lineurl =  liff.getDecodedIDToken().email
-      }else if(liff.getContext().type == "room"){
-       
+        Lineid = liff.getContext().groupId
+        lineurl = liff.getDecodedIDToken().email
+      } else if (liff.getContext().type == "room") {
+
         document.getElementById("ID").append(liff.getContext().roomId)
-        Lineid=liff.getContext().roomId
-        lineurl =  liff.getDecodedIDToken().email
-      }else if(liff.getContext().type == "utou"){
-        
+        Lineid = liff.getContext().roomId
+        lineurl = liff.getDecodedIDToken().email
+      } else if (liff.getContext().type == "utou") {
+
         document.getElementById("ID").append(liff.getContext().utouId)
-        Lineid=liff.getContext().utouId
-        lineurl =  liff.getDecodedIDToken().email
+        Lineid = liff.getContext().utouId
+        lineurl = liff.getDecodedIDToken().email
       }
-      phone=document.getElementById("phone").value
-      alert(phone + " ----"+ Lineid)
-      alert(lineurl + " email")
+      phone = document.getElementById("phone").value
+
+      Swal.fire(
+        phone,
+         + "-----",
+          + Lineid
+        )
+
+        Swal.fire(
+          "email",
+          + lineurl
+        )
+
+
+
+    
+
       try {
-        alert("1")
+        Swal.fire(
+          "1"
+         )
         RequestService.post({
           "headers": { "content-type": "application/json" },
           "url": "https://feeddev-line.cpf.co.th/FeedRegisterLineBot/api/Register",
@@ -330,29 +354,43 @@
             "Email": lineurl,
             "Nameline": username
           })
-          
+
         }, (error, response, body) => {
           if (error) {
             console.dir(error);
-            alert("error"+ error)
+            Swal.fire(
+              "error",
+               + error
+         )
+           
 
             return error;
           } else {
             console.dir(JSON.parse(body));
             num = num + JSON.parse(body);
-            alert("error"+ num)
+           
+            Swal.fire(
+              "error",
+               + num
+         )
             sendMsg()
           }
         });
       } catch (e) {
         console.log(e);
         err = e
-        alert(err)
+        Swal.fire(
+          err
+         )
+       
         num = num + "เข้า" + err
       }
       finally {
         num = "หมายเลข : " + phonenumber + " "
-        alert(num)
+        Swal.fire(
+          num
+         )
+        
       }
     }
 
