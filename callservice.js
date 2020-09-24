@@ -2,6 +2,7 @@
     var RequestService = require("request");
     
      async function Registerline() {
+      alert("ball")
         var phoneNo = document.getElementById('phone').value;
         const profile = await liff.getProfile()
         let num = ''
