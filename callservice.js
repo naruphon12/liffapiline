@@ -1,6 +1,8 @@
     var RequestService = require("request");
     const request = require('request-promise')
+
     async function Registerline() {
+        alert("1234")
         var phoneNo = document.getElementById('phone').value;
         const profile = await liff.getProfile()
         let num = ''
