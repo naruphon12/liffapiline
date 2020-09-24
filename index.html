@@ -20,7 +20,8 @@
   }
 
   input[type=text],
-  input[type=password] {
+  input[type=password],
+  input[type=tel]{
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -109,7 +110,7 @@
 
       <br>
 
-      <input type="text" id="phone" name="phone" pattern="[0-9]{10}">
+      <input type="tel" id="phone" name="phone" pattern="[0-9]{10}">
 
       <button type="submit"  onclick="Registerline()">ลงทะเบียน</button>
       <button id="btnClose" onclick="closed()">Close</button>
@@ -149,6 +150,9 @@
     console.log("Hello World!")
 
   </script>
+
+  <script src="callservice.js"></script>
+  
 
   <script src="https://static.line-scdn.net/liff/edge/versions/2.4.0/sdk.js"></script>
   <script>
