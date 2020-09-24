@@ -1,8 +1,6 @@
- 
     var RequestService = require("request");
-    
-     async function Registerline() {
-      alert("ball")
+    const request = require('request-promise')
+    async function Registerline() {
         var phoneNo = document.getElementById('phone').value;
         const profile = await liff.getProfile()
         let num = ''
@@ -41,7 +39,7 @@
         alert(lineurl + " email")
         try {
           alert("1")
-          RequestService.post({
+          await request.post({
             "headers": { "content-type": "application/json" },
             "url": "https://feeddev-line.cpf.co.th/FeedRegisterLineBot/api/Register",
             "body": JSON.stringify({
@@ -73,5 +71,6 @@
         finally {
           num = "หมายเลข : " + phonenumber + " "
           alert(num)
+
         }
       }
