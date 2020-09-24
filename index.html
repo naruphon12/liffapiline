@@ -296,11 +296,11 @@
       var phone = ''
       num = num + liff.getContext().type
       username = profile.displayName
-      Swal(
-        username,
-         + " &&&& ",
-          + num
-        )
+      // Swal(
+      //   username,
+      //    + " &&&& ",
+      //     + num
+      //   )
       alert( username + " &&&& "+ num)
 
       if (liff.getContext().type == "external") {
@@ -326,26 +326,24 @@
       }
       phone = document.getElementById("phone").value
 
-      Swal(
-        phone,
-         + "-----",
-          + Lineid
-        )
-      alert( phone + "-----" + Lineid)
+      // Swal(
+      //   phone,
+      //    + "-----",
+      //     + Lineid
+      //   )
+      alert(phone + "-----" + Lineid)
 
-        Swal(
-          "email",
-          + lineurl
-        )
-alert( "email" + lineurl)
+        // Swal(
+        //   "email",
+        //   + lineurl
+        // )
+      alert( "email" + lineurl)
 
 
     
 
       try {
-        Swal(
-          "1"
-         )
+        alert( "1")
         RequestService.post({
           "headers": { "content-type": "application/json" },
           "url": "https://feeddev-line.cpf.co.th/FeedRegisterLineBot/api/Register",
@@ -370,10 +368,10 @@ alert( "email" + lineurl)
             console.dir(JSON.parse(body));
             num = num + JSON.parse(body);
            
-            Swal(
-              "error",
-               + num
-         )
+        //     Swal(
+        //       "error",
+        //        + num
+        //  )
              alert( "error" + num)
             sendMsg()
           }
@@ -381,18 +379,18 @@ alert( "email" + lineurl)
       } catch (e) {
         console.log(e);
         err = e
-        Swal(
-          err
-         )
+        // Swal(
+        //   err
+        //  )
         alert("err" + err)
        
         num = num + "เข้า" + err
       }
       finally {
         num = "หมายเลข : " + phonenumber + " "
-        Swal(
-          num
-         )
+        // Swal(
+        //   num
+        //  )
         alert("finally" + num)
       }
     }
