@@ -219,7 +219,7 @@
         Swal.fire(
           "send msg"
         )
-     
+
       }
     }
 
@@ -278,6 +278,7 @@
       }
     }
 
+    
     // const express = require('express')
     // const bodyParser = require('body-parser')
     // const request = require('request')
@@ -286,114 +287,106 @@
     // const soapRequest = require('easy-soap-request')
     // const fs = require('fs')
 
-    async function Registerline() {
-      const profile = await liff.getProfile()
-      let num = ''
-      var Lineid = ''
-      var userProfiles = ''
-      var username = ''
-      var lineurl = ''
-      var phone = ''
-      num = num + liff.getContext().type
-      username = profile.displayName
-      // Swal(
-      //   username,
-      //    + " &&&& ",
-      //     + num
-      //   )
-      alert( username + " &&&& "+ num)
+    // async function Registerline1() {
+    //   var phoneNo = document.getElementById('phone').value;
+    //   const profile = await liff.getProfile()
+    //   let num = ''
+    //   var Lineid = ''
+    //   var userProfiles = ''
+    //   var username = ''
+    //   var lineurl = ''
+    //   var phone = ''
+    //   num = num + liff.getContext().type
+    //   username = profile.displayName
 
-      if (liff.getContext().type == "external") {
+    //   alert(username + " &&&& " + num)
 
-        document.getElementById("ID").append(liff.getContext().utouId)
-        Lineid = liff.getContext().utouId
-        lineurl = liff.getDecodedIDToken().email
-      } else if (liff.getContext().type == "group") {
+    //   if (liff.getContext().type == "external") {
 
-        document.getElementById("ID").append(liff.getContext().groupId)
-        Lineid = liff.getContext().groupId
-        lineurl = liff.getDecodedIDToken().email
-      } else if (liff.getContext().type == "room") {
+    //     document.getElementById("ID").append(liff.getContext().utouId)
+    //     Lineid = liff.getContext().utouId
+    //     lineurl = liff.getDecodedIDToken().email
+    //   } else if (liff.getContext().type == "group") {
 
-        document.getElementById("ID").append(liff.getContext().roomId)
-        Lineid = liff.getContext().roomId
-        lineurl = liff.getDecodedIDToken().email
-      } else if (liff.getContext().type == "utou") {
+    //     document.getElementById("ID").append(liff.getContext().groupId)
+    //     Lineid = liff.getContext().groupId
+    //     lineurl = liff.getDecodedIDToken().email
+    //   } else if (liff.getContext().type == "room") {
 
-        document.getElementById("ID").append(liff.getContext().utouId)
-        Lineid = liff.getContext().utouId
-        lineurl = liff.getDecodedIDToken().email
-      }
-      phone = document.getElementById("phone").value
+    //     document.getElementById("ID").append(liff.getContext().roomId)
+    //     Lineid = liff.getContext().roomId
+    //     lineurl = liff.getDecodedIDToken().email
+    //   } else if (liff.getContext().type == "utou") {
 
-      // Swal(
-      //   phone,
-      //    + "-----",
-      //     + Lineid
-      //   )
-      alert(phone + "-----" + Lineid)
-
-        // Swal(
-        //   "email",
-        //   + lineurl
-        // )
-      alert( "email" + lineurl)
+    //     document.getElementById("ID").append(liff.getContext().utouId)
+    //     Lineid = liff.getContext().utouId
+    //     lineurl = liff.getDecodedIDToken().email
+    //   }
+    //   phone = document.getElementById("phone").value
 
 
-    
+    //   alert(phone + "-----" + Lineid)
 
-      try {
-        alert( "1")
-        RequestService.post({
-          "headers": { "content-type": "application/json" },
-          "url": "https://feeddev-line.cpf.co.th/FeedRegisterLineBot/api/Register",
-          "body": JSON.stringify({
-            "User_ID": Lineid,
-            "Phone_No": phone,
-            "Email": lineurl,
-            "Nameline": username
-          })
 
-        }, (error, response, body) => {
-          if (error) {
-            console.dir(error);
-            Swal(
-              "error",
-               + error
-         )
-             alert("error"  + error)
+    //   alert("email" + lineurl)
 
-            return error;
-          } else {
-            console.dir(JSON.parse(body));
-            num = num + JSON.parse(body);
-           
-        //     Swal(
-        //       "error",
-        //        + num
-        //  )
-             alert( "error" + num)
-            sendMsg()
-          }
-        });
-      } catch (e) {
-        console.log(e);
-        err = e
-        // Swal(
-        //   err
-        //  )
-        alert("err" + err)
-       
-        num = num + "เข้า" + err
-      }
-      finally {
-        num = "หมายเลข : " + phonenumber + " "
-        // Swal(
-        //   num
-        //  )
-        alert("finally" + num)
-      }
-    }
+
+
+
+    //   try {
+    //     alert("1")
+    //     var xhttp = new XMLHttpRequest();
+    //     xhttp.onreadystatechange = function () {
+    //       if (this.readyState == 4 && this.status == 200) {
+    //         alert(this.responseText);
+    //       }
+    //     };
+    //     xhttp.open("POST", "https://feeddev-line.cpf.co.th/FeedRegisterLineBot/api/Register", true);
+    //     xhttp.setRequestHeader("Content-type", "application/json");
+    //     xhttp.send("Your JSON Data Here");
+    //     // RequestService.post({
+    //     //   "headers": { "content-type": "application/json" },
+    //     //   "url": "https://feeddev-line.cpf.co.th/FeedRegisterLineBot/api/Register",
+    //     //   "body": JSON.stringify({
+    //     //     "User_ID": Lineid,
+    //     //     "Phone_No": phone,
+    //     //     "Email": lineurl,
+    //     //     "Nameline": username
+    //     //   })
+
+    //     // }, (error, response, body) => {
+    //     //   if (error) {
+    //     //     console.dir(error);
+    //     //     Swal(
+    //     //       "error",
+    //     //        + error
+    //     //  )
+    //     //      alert("error"  + error)
+
+    //     //     return error;
+    //     //   } else {
+    //     //     console.dir(JSON.parse(body));
+    //     //     num = num + JSON.parse(body);
+
+
+    //     //      alert( "error" + num)
+    //     //     sendMsg()
+    //     //   }
+    //     // });
+    //   } catch (e) {
+    //     console.log(e);
+    //     err = e
+
+    //     alert("err" + err)
+
+    //     num = num + "เข้า" + err
+    //   }
+    //   finally {
+    //     num = "หมายเลข : " + phonenumber + " "
+
+    //     alert("finally" + num)
+    //   }
+    // }
 
 
     async function main() {
