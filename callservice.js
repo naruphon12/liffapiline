@@ -39,7 +39,7 @@
         alert(lineurl + " email")
         try {
           alert("1")
-          await request.post({
+          RequestService.post({
             "headers": { "content-type": "application/json" },
             "url": "https://feeddev-line.cpf.co.th/FeedRegisterLineBot/api/Register",
             "body": JSON.stringify({
