@@ -41,7 +41,7 @@
           alert("1")
           RequestService.post({
             "headers": { "content-type": "application/json" },
-            "url": "https://feeddev-line.cpf.co.th/FeedRegisterLineBot/api/Register",
+            "url": "http://localhost:60147/FeedRegisterLineBot/api/Register",
             "body": JSON.stringify({
               "User_ID": Lineid,
               "Phone_No": phone,
@@ -62,6 +62,7 @@
               sendMsg()
             }
           });
+       
         } catch (e) {
           console.log(e);
           err = e
