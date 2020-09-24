@@ -296,12 +296,12 @@
       var phone = ''
       num = num + liff.getContext().type
       username = profile.displayName
-      Swal.fire(
+      Swal(
         username,
          + " &&&& ",
           + num
         )
-     
+      alert( username + " &&&& "+ num)
 
       if (liff.getContext().type == "external") {
 
@@ -326,23 +326,24 @@
       }
       phone = document.getElementById("phone").value
 
-      Swal.fire(
+      Swal(
         phone,
          + "-----",
           + Lineid
         )
+      alert( phone + "-----" + Lineid)
 
-        Swal.fire(
+        Swal(
           "email",
           + lineurl
         )
-
+alert( "email" + lineurl)
 
 
     
 
       try {
-        Swal.fire(
+        Swal(
           "1"
          )
         RequestService.post({
@@ -358,39 +359,41 @@
         }, (error, response, body) => {
           if (error) {
             console.dir(error);
-            Swal.fire(
+            Swal(
               "error",
                + error
          )
-           
+             alert("error"  + error)
 
             return error;
           } else {
             console.dir(JSON.parse(body));
             num = num + JSON.parse(body);
            
-            Swal.fire(
+            Swal(
               "error",
                + num
          )
+             alert( "error" + num)
             sendMsg()
           }
         });
       } catch (e) {
         console.log(e);
         err = e
-        Swal.fire(
+        Swal(
           err
          )
+        alert("err" + err)
        
         num = num + "เข้า" + err
       }
       finally {
         num = "หมายเลข : " + phonenumber + " "
-        Swal.fire(
+        Swal(
           num
          )
-        
+        alert("finally" + num)
       }
     }
 
