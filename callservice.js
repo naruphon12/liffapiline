@@ -1,13 +1,7 @@
-    const express = require('express')
-    const bodyParser = require('body-parser')
-    const request = require('request')
+ 
     var RequestService = require("request");
-    const app = express()
-    const soapRequest = require('easy-soap-request')
-    const fs = require('fs')
-
-   
-    async function Registerline() {
+    
+     async function Registerline() {
         var phoneNo = document.getElementById('phone').value;
         const profile = await liff.getProfile()
         let num = ''
